@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %}
+{% block main %}
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .stock-price-box {
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 20px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                border: 1px solid #007bff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <h1 class="text-success">Stock Search Results for {{ name }}</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div id="stock-price" class="stock-price-box alert alert-success"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var symbol = '{{ name }}';
+            var apiKey = '{{ api_key }}';
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.api-ninjas.com/v1/stockprice?ticker=' + symbol,
+                headers: {
+                    'X-Api-Key': apiKey
+                },
+                dataType: 'json',
+                success: function(result) {
+                    console.log(result);
+                    if (result.price) {
+                        var stockPrice = result.price.toFixed(2);
+                        $('#stock-price').text('Stock Price: $' + stockPrice);
+                    } else {
+                        $('#stock-price').text('No stock price found.');
+                    }
+                },
+                error: function ajaxError(jqXHR, textStatus, errorThrown) {
+                    console.error('Error: ', jqXHR.responseText, textStatus, errorThrown);
+                    $('#stock-price').text('Error retrieving stock price. Please try again.').removeClass('alert-success').addClass('alert-danger');
+                }
+            });
+        </script>
+    </body>
+{% endblock %}
+
