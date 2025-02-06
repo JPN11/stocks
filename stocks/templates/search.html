@@ -1,66 +1,12 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Stocks">
-    <title>Stocks</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        form {
-            width: 90%;
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-        input[type="text"] {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="text"]:focus {
-            border-color: #4CAF50;
-            outline: none;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-        }
-        button[type="submit"] {
-            width: 100%;
-            height: 40px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button[type="submit"]:hover {
-            background-color: #3e8e41;
-        }
-    </style>
-</head>
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %}
+
+{% block main %}
 <body>
-    <h1>Stocks</h1>
+ <h1>Stocks</h1>
     <form action="/search" method="get">
         <input type="text" name="symbol" autofocus placeholder="Search for stocks by symbol">
         <button type="submit">Get Stock Info</button>
     </form>
 </body>
-</html>
+{% endblock %}
