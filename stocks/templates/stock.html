@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Search: {{ name }}{% endblock %}
+{% block title %}Search {{ name }}{% endblock %}
 {% block main %}
         <style>
             body {
@@ -30,40 +30,16 @@
     </head>
 
     <body>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <h1 class="text-success">Stock Search Results for {{ name }}</h1>
+        <h1 class="text-primary">Stock Search Results for {{ name }}</h1>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div id="stock-price" class="stock-price-box alert alert-success"></div>
+                    <div id="stock-price" class="stock-price-box alert alert-primary">
+                        <p class="text-primary">A share of {{ name }} currently costs {{ price }}</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <script>
-            var symbol = '{{ name }}';
-            var apiKey = '{{ api_key }}';
-            $.ajax({
-                method: 'GET',
-                url: 'https://api.api-ninjas.com/v1/stockprice?ticker=' + symbol,
-                headers: {
-                    'X-Api-Key': apiKey
-                },
-                dataType: 'json',
-                success: function(result) {
-                    console.log(result);
-                    if (result.price) {
-                        var stockPrice = result.price.toFixed(2);
-                        $('#stock-price').text('Stock Price: $' + stockPrice);
-                    } else {
-                        $('#stock-price').text('No stock price found.');
-                    }
-                },
-                error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                    console.error('Error: ', jqXHR.responseText, textStatus, errorThrown);
-                    $('#stock-price').text('Error retrieving stock price. Please try again.').removeClass('alert-success').addClass('alert-danger');
-                }
-            });
-        </script>
     </body>
 {% endblock %}
 

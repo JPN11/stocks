@@ -3,10 +3,12 @@
 
 {% block main %}
 <body>
- <h1>Stocks</h1>
-    <form action="/search" method="get">
-        <input type="text" name="symbol" autofocus placeholder="Search for stocks by symbol">
-        <button type="submit">Get Stock Info</button>
+ <h1 class="text-primary">Search</h1>
+    <form action="/stock" method="post">
+        <div class="input-group mb-3">
+            <input type="text" name="symbol" autofocus placeholder="Search for stocks by symbol" class="form-control col-md-4">
+        </div>
+        <button class="btn btn-primary" type="submit">Get Stock Info</button>
     </form>
 </body>
 {% endblock %}
